@@ -32,5 +32,5 @@ lazybones {
     // licenses = ["Apache-2.0"]
     // vcsUrl = "https://github.com/yourRepoName"
 
-    template "emews" includes "sweep", "eqp", "eqr"
+    template "emews" includes "sweep", "eqpy", "eqr"
 }
