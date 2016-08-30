@@ -11,6 +11,8 @@ def isInt(val, int min) {
 def params = [:]
 params.model_name = ask("Model Name? ", null, "model_name")
 params.model_name = params.model_name.replace(' ', '_')
+//params.model_sh = include(templateDir.path + "/ask_model_sh.groovy",
+//  params)
 
 def yn = ask("Create model script file? (Y/n) ", "Y", "create_model_sh")
 while (!(yn.capitalize().equals("Y") || yn.capitalize().equals("N"))) {
