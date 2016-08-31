@@ -28,4 +28,4 @@ CMD_LINE_ARGS=" -nv=5 -seed=0"
 #swift-t -m pbs -p -I $EQPY -r $EQPY eqpy_run.swift$CMD_LINE_ARGS
 
 # Run immediately without a scheduler.
-swift-t -n $PROCS -p -I $EQPY -r $EQPY eqpy_run.swift $CMD_LINE_ARGS
+swift-t -n $PROCS -p -I $EQPY -r $EQPY swift_run_eqpy.swift $CMD_LINE_ARGS

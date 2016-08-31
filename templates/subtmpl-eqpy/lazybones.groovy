@@ -33,12 +33,36 @@ def run_2 = '''
 
 
 def params = [:]
-params.model_sh = "emews_root + \"/scripts/model.sh\""
+
+// This should be replaced with include functionalty when lazybones release updated
+// with that
+params.model_name = ask("Model Name? ", null, "model_name")
+params.model_name = params.model_name.replace(' ', '_')
+
+def yn = ask("Create model script file? (Y/n) ", "Y", "create_model_sh")
+while (!(yn.capitalize().equals("Y") || yn.capitalize().equals("N"))) {
+  yn = ask("Create model script file? (Y/n) ", "Y", "create_model_sh")
+}
+
+params.model_sh = "eqpy_" + params.model_name + ".sh"
+if (yn.capitalize().equals("Y")) {
+  model_sh_file = new File(FilenameUtils.concat(projectDir.path,
+    "scripts"), params.model_sh)
+    FileUtils.copyFile(new File(templateDir, "model.sh.gtpl"), model_sh_file)
+    println "Created script file for running the model ./${FilenameUtils.normalize(model_sh_file.path)}"
+} else {
+  // This should be already in the scripts directory
+  params.model_sh = ask("Model script file name? ", null, "eqpy_model_sh")
+}
+// end chunk to replace
+
+// model_sh in template is the  path
+params.model_sh = "emews_root + \"/scripts/${params.model_sh}\""
 
 params.python_package = ask("Python package? (python_package_placeholder) ",
   "python_package_placeholder", "python_package")
 
-def yn = ask("Does the python algorithm produce multiple sets of parameters? (Y/n) ",
+yn = ask("Does the python algorithm produce multiple sets of parameters? (Y/n) ",
 "Y", "parameter_sets")
 while (!(yn.capitalize().equals("Y") || yn.capitalize().equals("N"))) {
     yn = ask("Does the python algorithm produce multiple sets of parameters? (Y/n) ",
@@ -50,12 +74,17 @@ if (yn.equals("Y")) {
   params.run_block = run_2
 }
 
-def swift_script_name = ask("Swift script name? (eqpy_run.swift)", "eqpy_run.swift",
-  "swift_script_name")
+def swift_script_name = ask("Swift script name? (swift_run_eqpy.swift) ",
+  "swift_run_eqpy.swift",  "swift_script_name")
 
-processTemplates("eqpy_run.swift", params)
+def swift_sh_name = ask("Swift launch script name? (swift_run_eqpy.sh) ",
+  "swift_run_eqpy.sh", "swift_launch_script_name")
 
-files = [['eqpy_run.swift', swift_script_name]]
+processTemplates("swift_run_eqpy.swift", params)
+
+files = [['swift_run_eqpy.swift', swift_script_name],
+  ['swift_run_eqpy.sh', swift_sh_name ]]
+
 for (f in files) {
   def dest = new File(projectDir, FilenameUtils.concat("swift", f[1]))
   def source = new File(templateDir, f[0])

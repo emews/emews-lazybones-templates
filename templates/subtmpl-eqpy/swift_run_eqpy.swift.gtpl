@@ -26,9 +26,16 @@ string read_last_row = ----
   res <- last.row['B']
 ----;
 
-app (file out, file err) run_model (model_sh, string param_line, string instance)
+app (file out, file err) run_model (string model_sh, string param_line, string instance)
 {
     "bash" model_sh param_line emews_root instance @stdout=out @stderr=err;
+}
+
+(float result) get_result(string instance_dir) {
+  // Use a few lines of R code to read the output file
+  // See the read_last_row variable above
+  string r_code = read_last_row % instance_dir;
+  result = tofloat(R(r_code, "toString(res)"));
 }
 
 (float result) run_obj(string param_line, string id_suffix)
@@ -38,7 +45,7 @@ app (file out, file err) run_model (model_sh, string param_line, string instance
     make_dir(instance_dir) => {
       file out <instance_dir + "out.txt">;
       file err <instance_dir + "err.txt">;
-      string model_sh = ${model_sh}
+      string model_sh = ${model_sh};
       (out,err) = run_model(model_sh, param_line,instance_dir) =>
       result = get_result(instance_dir) =>
       // delete the instance directory as it is no longer needed
@@ -47,7 +54,7 @@ app (file out, file err) run_model (model_sh, string param_line, string instance
     }
 }
 
-(string[] parameter_combos) create_parameter_combinations(string params, int trials) {
+(string parameter_combos[]) create_parameter_combinations(string params, int trials) {
   // TODO
   // Given the parameter string and the number of trials for that
   // those parameters, create an array of parameter combinations
