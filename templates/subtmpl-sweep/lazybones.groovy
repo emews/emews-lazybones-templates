@@ -22,7 +22,7 @@ while (!(yn.capitalize().equals("Y") || yn.capitalize().equals("N"))) {
 params.model_sh = params.model_name + ".sh"
 if (yn.capitalize().equals("Y")) {
   model_sh_file = new File(FilenameUtils.concat(projectDir.path,
-    "scripts"), params.model_name + ".sh")
+    "scripts"), params.model_sh)
     FileUtils.copyFile(new File(templateDir, "model.sh.gtpl"), model_sh_file)
     println "Created script file for running the model ./${FilenameUtils.normalize(model_sh_file.path)}"
 } else {

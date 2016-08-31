@@ -15,5 +15,6 @@ emews_root=$2
 instance_directory=$3
 cd $instance_directory
 
+# TODO
 # Set any additional arguments
 # Run the model passing the required arguments
