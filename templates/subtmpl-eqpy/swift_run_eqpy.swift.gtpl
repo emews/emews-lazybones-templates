@@ -93,8 +93,15 @@ app (file out, file err) run_model (string model_sh, string param_line, string i
     if (params == "DONE")
     {
         string finals =  EQPy_get(ME);
-        // TODO ?? what to do with the results?
-        printf("Results: %s", finals) =>
+        // TODO if appropriate
+        // split finals string and join with "\n"
+        // e.g. finals is a ";" separated string and we want each
+        // element on its own line:
+        // multi_line_finals = join(split(finals, ";"), "\n");
+        string fname = "%s/final_result_%i" % (turbine_output, ME_rank);
+        file results_file <fname> = write(finals) =>
+        printf("Writing final result to %s", fname) =>
+        // printf("Results: %s", finals) =>
         v = make_void() =>
         c = false;
     }
