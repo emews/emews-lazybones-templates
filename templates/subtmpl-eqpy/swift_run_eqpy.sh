@@ -1,13 +1,25 @@
-#export TURBINE_LOG=0 TURBINE_DEBUG=0 ADLB_DEBUG=0
-export EMEWS_PROJECT_ROOT=$PWD/..
-export TURBINE_OUTPUT=$EMEWS_PROJECT_ROOT/experiments/model
+#! /usr/bin/env bash
+
+set -eu
+
+if [ "$#" -ne 1 ]; then
+  script_name=$(basename $0)
+  echo "Usage: ${script_name} EXPERIMENT_ID (e.g. ${script_name} experiment_1)"
+  exit 1
+fi
+
+# uncomment to turn off swift/t logging
+# export TURBINE_LOG=0 TURBINE_DEBUG=0 ADLB_DEBUG=0
+export EMEWS_PROJECT_ROOT=$( cd $( dirname $0 )/.. ; /bin/pwd )
+export EXPID=$1
+export TURBINE_OUTPUT=$EMEWS_PROJECT_ROOT/experiments/$EXPID
 # QUEUE, WALLTIME, PROCS, PPN, AND TURNBINE_JOBNAME will
 # be ignored if the -m scheduler flag is not used
 export QUEUE=batch
 export WALLTIME=00:10:00
 export PROCS=4   # number of processes
 export PPN=16
-export TURBINE_JOBNAME="model_job"
+export TURBINE_JOBNAME="${EXP_ID}_job"
 # if R cannot be found, then these will need to be
 # uncommented and set correctly.
 #export R_HOME=/soft/R/src/R-3.2.2/
@@ -25,8 +37,18 @@ EQPY=$EMEWS_PROJECT_ROOT/ext/EQ-Py
 # for your EQ/Py based run.
 CMD_LINE_ARGS=" -nv=5 -seed=0"
 
-# pbs scheduler run.
-#swift-t -m pbs -p -I $EQPY -r $EQPY eqpy_run.swift$CMD_LINE_ARGS
+# Uncomment this for the BG/Q:
+#export MODE=BGQ QUEUE=default
 
-# Run immediately without a scheduler.
-swift-t -n $PROCS -p -I $EQPY -r $EQPY swift_run_eqpy.swift $CMD_LINE_ARGS
+# set machine to your schedule type (e.g. pbs, slurm, cobalt etc.),
+# or empty for an immediate non-queued unscheduled run
+MACHINE=""
+
+if [ -n "$MACHINE" ]; then
+  MACHINE="-m $MACHINE"
+fi
+
+# echo's anything following standard out
+set -x
+
+swift-t -n $PROCS $MACHINE -p -I $EQPY -r $EQPY swift_run_eqpy.swift $CMD_LINE_ARGS
