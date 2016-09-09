@@ -13,13 +13,15 @@ fi
 export EMEWS_PROJECT_ROOT=$( cd $( dirname $0 )/.. ; /bin/pwd )
 export EXPID=$1
 export TURBINE_OUTPUT=$EMEWS_PROJECT_ROOT/experiments/$EXPID
-# QUEUE, WALLTIME, PROCS, PPN, AND TURNBINE_JOBNAME will
+export PROCS=4   # number of processes
+
+# QUEUE, WALLTIME, PPN, AND TURNBINE_JOBNAME will
 # be ignored if the -m scheduler flag is not used
 export QUEUE=batch
 export WALLTIME=00:10:00
-export PROCS=4   # number of processes
 export PPN=16
-export TURBINE_JOBNAME="${EXP_ID}_job"
+export TURBINE_JOBNAME="${EXPID}_job"
+
 # if R cannot be found, then these will need to be
 # uncommented and set correctly.
 #export R_HOME=/soft/R/src/R-3.2.2/
@@ -48,7 +50,7 @@ if [ -n "$MACHINE" ]; then
   MACHINE="-m $MACHINE"
 fi
 
-# echo's anything following standard out
+# echo's anything following this to standard out
 set -x
 
 swift-t -n $PROCS $MACHINE -p -I $EQPY -r $EQPY swift_run_eqpy.swift $CMD_LINE_ARGS
