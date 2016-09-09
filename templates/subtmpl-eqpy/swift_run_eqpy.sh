@@ -53,4 +53,4 @@ fi
 # echo's anything following this to standard out
 set -x
 
-swift-t -n $PROCS $MACHINE -p -I $EQPY -r $EQPY swift_run_eqpy.swift $CMD_LINE_ARGS
+swift-t -n $PROCS $MACHINE -p -I $EQPY -r $EQPY \$EMEWS_PROJECT_ROOT/swift/swift_run_eqpy.swift $CMD_LINE_ARGS

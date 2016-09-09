@@ -39,4 +39,4 @@ fi
 # echo's anything following this standard out
 set -x
 
-swift-t -n \$PROCS \$MACHINE -p swift_run_sweep.swift -f="${input_file}"
+swift-t -n \$PROCS \$MACHINE -p \$EMEWS_PROJECT_ROOT/swift/swift_run_sweep.swift -f="${input_file}"
