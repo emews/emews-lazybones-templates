@@ -49,9 +49,11 @@ The directories are intended to contain the following:
  * `scripts` - any necessary scripts (e.g. scripts to launch a model), excluding scripts used to run the workflow.
  * `swift` - swift code
 
-The subtemplates will populate these directories with files appropriate for the
-type of workflow associated with that subtemplate. The subtemplates are executed
-with the command:
+ ## Subtemplates ##
+
+The subtemplates will populate the above directories with files appropriate for
+the type of workflow associated with that subtemplate. The subtemplates are
+executed with the command:
 
 ```
 lazybones generate X
