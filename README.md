@@ -30,6 +30,7 @@ will create the default EMEWS project structure in a swift_project directory.
 swift_project\
   data\
   ext\
+  etc\
   python\
     test\
   R\
@@ -41,6 +42,7 @@ swift_project\
 The directories are intended to contain the following:
 
  * `data` - model input etc. data
+ * `etc` - additional code used by EMEWS
  * `ext` - swift-t extensions such as eqpy, eqr
  * `python` - python code (e.g. model exploration algorithms written in python)
  * `python\test` - tests of the python code
