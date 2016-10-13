@@ -1,5 +1,3 @@
-
-
 Re. running autotools from with the post-install lazybones scripts,
 
 * build.sh runs bootstrap, configure, etc.

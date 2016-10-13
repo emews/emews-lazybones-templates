@@ -36,7 +36,7 @@ params.working_directory = params.prefix + "/eqr"
 
 def files = ['BlockingQueue.h', 'bootstrap', "configure.ac", "EQR.cpp",
     "EQR.h", "EQR.i", "EQR.swift", "make-package.tcl", "Makefile.in",
-    "Readme.rst", "reference.mk", "settings.mk.in", "settings.template.sh"]
+    "Readme.rst", "settings.mk.in", "settings.template.sh"]
 println "Copying EQ-R source to ${params.working_directory}"
 
 for (f in files) {
