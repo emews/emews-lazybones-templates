@@ -48,6 +48,10 @@ for (f in files) {
    }
  }
 
+ def gignoreDest = new File(params.working_directory, ".gitignore")
+ def gignoreSource = new File(templateDir.path + "/eqr", "gitignore.txt")
+ FileUtils.copyFile(gignoreSource, gignoreDest)
+
 def yn = ask("Build EQ/R ('n' to run autotools later)? (Y/n) ", "y", "build_eqr")
 if (yn.equalsIgnoreCase('y')) {
 
