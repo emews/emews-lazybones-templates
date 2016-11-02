@@ -1,0 +1,12 @@
+https://raw.githubusercontent.com/emews/EQ-R/master/src/BlockingQueue.h
+https://raw.githubusercontent.com/emews/EQ-R/master/src/EQR.cpp
+https://raw.githubusercontent.com/emews/EQ-R/master/src/EQR.h
+https://raw.githubusercontent.com/emews/EQ-R/master/src/EQR.i
+https://raw.githubusercontent.com/emews/EQ-R/master/src/EQR.swift
+https://raw.githubusercontent.com/emews/EQ-R/master/src/Makefile.in
+https://raw.githubusercontent.com/emews/EQ-R/master/src/Readme.rst
+https://raw.githubusercontent.com/emews/EQ-R/master/src/bootstrap
+https://raw.githubusercontent.com/emews/EQ-R/master/src/configure.ac
+https://raw.githubusercontent.com/emews/EQ-R/master/src/make-package.tcl
+https://raw.githubusercontent.com/emews/EQ-R/master/src/settings.mk.in
+https://raw.githubusercontent.com/emews/EQ-R/master/src/settings.template.sh

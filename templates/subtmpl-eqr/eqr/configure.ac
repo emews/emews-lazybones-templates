@@ -26,6 +26,7 @@ AC_ARG_WITH(tcl-version,
               [TCL_VERSION=$withval],
               [TCL_VERSION=8.6])
 AC_MSG_RESULT([Using Tcl version: $TCL_VERSION])
+AC_PREFIX_DEFAULT($PWD/..)
 
 USE_TCLSH=tclsh$TCL_VERSION
 AC_PATH_PROG([TCL],[$USE_TCLSH],[nope])

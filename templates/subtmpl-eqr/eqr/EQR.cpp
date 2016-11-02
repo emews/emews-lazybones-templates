@@ -60,11 +60,17 @@ void initR(string script_file) {
 
   LOG("initR: " << script_file);
 
-  r = new RInside(argc, argv);
-  (*r)["OUT_put"] = Rcpp::InternalFunction(&OUT_put);
-  (*r)["IN_get"]  = Rcpp::InternalFunction(&IN_get);
+  if (r == nullptr) {
+    r = new RInside(argc, argv);
+    (*r)["OUT_put"] = Rcpp::InternalFunction(&OUT_put);
+    (*r)["IN_get"]  = Rcpp::InternalFunction(&IN_get);
+  }
 
   worker = thread(do_work, ref(RInside::instance()), script_file);
+}
+
+bool EQR_is_initialized() {
+  return r != nullptr;
 }
 
 // To be called from R
@@ -98,7 +104,6 @@ void IN_put(string val) {
 // To be called from client code (e.g., Swift/T)
 void stopIt() {
   LOG("stopIt()");
-  IN.push("");
   worker.join();
 }
 
