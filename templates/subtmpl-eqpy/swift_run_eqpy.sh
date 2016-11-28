@@ -44,8 +44,8 @@ export RESIDENT_WORK_RANKS=$(( PROCS - 2 ))
 EQPY=$EMEWS_PROJECT_ROOT/ext/EQ-Py
 
 # TODO edit command line arguments, e.g. -nv etc., as appropriate
-# for your EQ/Py based run. $* will pass any of this script's command
-# line arguments to swift.
+# for your EQ/Py based run. $* will pass all of this script's
+# command line arguments to the swift script
 CMD_LINE_ARGS="$* -nv=5 -seed=0"
 
 # Uncomment this for the BG/Q:

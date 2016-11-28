@@ -39,9 +39,9 @@ export TURBINE_JOBNAME="\${EXPID}_job"
 # export PYTHONPATH=/path/to/python/packages
 
 
-# TODO edit command line arguments, e.g. -nv etc., as appropriate
-# for your EQ/Py based run. Note that \$* will pass any of this
-# script's command line arguments to swift-t
+# TODO edit command line arguments as appropriate
+# for your run. Note that default \$* will pass all of this script's
+# command line arguments to the swift script.
 CMD_LINE_ARGS="\$*"
 
 # set machine to your schedule type (e.g. pbs, slurm, cobalt etc.),
