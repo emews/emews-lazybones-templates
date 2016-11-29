@@ -40,7 +40,7 @@ export TURBINE_JOBNAME="\${EXPID}_job"
 
 
 # TODO edit command line arguments as appropriate
-# for your run. Note that default \$* will pass all of this script's
+# for your run. Note that the default \$* will pass all of this script's
 # command line arguments to the swift script.
 CMD_LINE_ARGS="\$*"
 
