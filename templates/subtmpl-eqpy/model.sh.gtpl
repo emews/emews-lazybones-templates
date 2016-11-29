@@ -2,7 +2,7 @@
 
 set -eu
 
-# Check for an optional timeout threshhold. If the duration of the
+# Check for an optional timeout threshold in seconds. If the duration of the
 # model run as executed below, takes longer that this threshhold
 # then the run will be aborted. Note that the "timeout" command
 # must be supported by executing OS.
