@@ -42,7 +42,8 @@ cd $instance_directory
 MODEL_CMD=""
 
 # Turn bash error checking off. This is
-# required to properly
+# required to properly handle the model execution return value
+# the optional timeout.
 set +e
 
 $TIMEOUT_CMD $MODEL_CMD
