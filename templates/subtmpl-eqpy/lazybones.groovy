@@ -74,16 +74,17 @@ if (yn.equals("Y")) {
   params.run_block = run_2
 }
 
-def swift_script_name = ask("Swift script name? (swift_run_eqpy.swift) ",
+params.swift_script_name = ask("Swift script name? (swift_run_eqpy.swift) ",
   "swift_run_eqpy.swift",  "swift_script_name")
 
-def swift_sh_name = ask("Swift launch script name? (swift_run_eqpy.sh) ",
+params.swift_sh_name = ask("Swift launch script name? (swift_run_eqpy.sh) ",
   "swift_run_eqpy.sh", "swift_launch_script_name")
 
 processTemplates("swift_run_eqpy.swift", params)
+processTemplates("swift_run_eqpy.sh", params)
 
-files = [['swift_run_eqpy.swift', swift_script_name],
-  ['swift_run_eqpy.sh', swift_sh_name ]]
+files = [['swift_run_eqpy.swift', params.swift_script_name],
+  ['swift_run_eqpy.sh', params.swift_sh_name ]]
 
 for (f in files) {
   def dest = new File(projectDir, FilenameUtils.concat("swift", f[1]))
