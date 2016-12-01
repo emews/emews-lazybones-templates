@@ -5,6 +5,7 @@ import location;
 import string;
 import EQR;
 import R;
+import assert;
 
 string emews_root = getenv("EMEWS_PROJECT_ROOT");
 string turbine_output = getenv("TURBINE_OUTPUT");
@@ -76,9 +77,9 @@ app (file out, file err) run_model (string model_sh, string param_line, string i
        b;
        b=c, i = i + 1)
   {
-    string next_params =  EQR_get(loc);
+    string params =  EQR_get(ME);
     boolean c;
-    if (next_params == "DONE")
+    if (params == "DONE")
     {
       string finals =  EQR_get(ME);
       // TODO if appropriate
@@ -96,13 +97,11 @@ app (file out, file err) run_model (string model_sh, string param_line, string i
     else
     {
       ${run_block}
-      // string res = run_obj(next_params);
-	    // EQR_put(loc, res) => c = true => print_time("%i" % i);
     }
   }
 }
 
-(void o) start(int ME_rank, int num_variations, int random_seed)) {
+(void o) start(int ME_rank, int num_variations, int random_seed) {
     location ME = locationFromRank(ME_rank);
     // TODO: Edit algo_params to include those required by the R
     // algorithm.
@@ -112,47 +111,15 @@ app (file out, file err) run_model (string model_sh, string param_line, string i
     // should be passed with a \"%s\" format string.
     // e.g. algo_params = "%d,%\"%s\"" % (random_seed, "ABC");
     string algo_params = "%d" % random_seed;
-    string algorithm = strcat(emews_root,"${r_algorithm}");
+    string algorithm = strcat(emews_root,"/R/${r_algorithm}");
     EQR_init_script(ME, algorithm) =>
     EQR_get(ME) =>
     EQR_put(ME, algo_params) =>
-    loop(ME, ME_rank, trials) => {
+    loop(ME, ME_rank, num_variations) => {
         EQR_stop(ME) =>
         EQR_delete_R(ME);
         o = propagate();
     }
-}
-
-(void v) loop(location ME, int ME_rank, int trials) {
-
-    for (boolean b = true, int i = 1;
-       b;
-       b=c, i = i + 1)
-  {
-    string next_params =  EQR_get(loc);
-    boolean c;
-    if (next_params == "DONE")
-    {
-      string finals =  EQR_get(ME);
-      // TODO if appropriate
-      // split finals string and join with "\\n"
-      // e.g. finals is a ";" separated string and we want each
-      // element on its own line:
-      // multi_line_finals = join(split(finals, ";"), "\\n");
-      string fname = "%s/final_result_%i" % (turbine_output, ME_rank);
-      file results_file <fname> = write(finals) =>
-      printf("Writing final result to %s", fname) =>
-      // printf("Results: %s", finals) =>
-      v = make_void() =>
-      c = false;
-    }
-    else
-    {
-      ${run_block}
-      // string res = run_obj(next_params);
-	    // EQR_put(loc, res) => c = true => print_time("%i" % i);
-    }
-  }
 }
 
 // deletes the specified directory
