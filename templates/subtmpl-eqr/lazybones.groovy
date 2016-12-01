@@ -103,7 +103,7 @@ if (yn.equalsIgnoreCase('y')) {
     "COMPILING.txt for possible solutions."
   }
 } else {
-  println "See ext/EQ-R/eqr/Readme.txt for compilation instructions."
+  println "See ext/EQ-R/eqr/COMPILING.txt for compilation instructions."
 }
 
 def run_1 = '''
