@@ -34,6 +34,7 @@ export TURBINE_JOBNAME="\${EXPID}_job"
 # uncommented and set correctly.
 # export R_HOME=/path/to/R
 # export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:\$R_HOME/lib
+# export PYTHONHOME=/path/to/python
 export PYTHONPATH=\$EMEWS_PROJECT_ROOT/python:\$EMEWS_PROJECT_ROOT/ext/EQ-Py
 
 # Resident task workers and ranks
