@@ -52,7 +52,7 @@ if (yn.capitalize().equals("Y")) {
     println "Created script file for running the model ./${FilenameUtils.normalize(model_sh_file.path)}"
 } else {
   // This should be already in the scripts directory
-  params.model_sh = ask("Model script file name? ", null, "eqpy_model_sh")
+  params.model_sh = ask("Model script file name? ", null, "eqpy_model.sh")
 }
 // end chunk to replace
 
