@@ -79,6 +79,13 @@ app (file out, file err) run_model (string model_sh, string param_line, string i
   {
     string params =  EQR_get(ME);
     boolean c;
+
+    // TODO
+    // Edit the finished flag, if necessary.
+    // when the python algorithm is finished it should
+    // pass "DONE" into the queue, and then the
+    // final set of parameters. If your python algorithm
+    // passes something else then change "DONE" to that
     if (params == "DONE")
     {
       string finals =  EQR_get(ME);
