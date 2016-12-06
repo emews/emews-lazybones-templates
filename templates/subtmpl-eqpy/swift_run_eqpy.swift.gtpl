@@ -59,7 +59,7 @@ app (file out, file err) run_model (string model_sh, string param_line, string i
   // Given the parameter string and the number of trials for that
   // those parameters, create an array of parameter combinations
   // Typically, this involves at least appending a different random
-  // seed to he parameter string for each trial
+  // seed to the parameter string for each trial
 }
 
 (float agg_result) obj(string params, int trials, string iter_indiv_id) {
