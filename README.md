@@ -10,6 +10,24 @@ The source for the templates is in the template folder. To install the templates
 ./gradlew installTemplateEmews
 ```
 
+## Publishing the Templates ##
+
+The templates can be published to the emews/emews-templates bintray
+repository with
+
+```bash
+./gradlew publishTemplateEmews
+```
+
+This requires a gradle.properties file in the top directory with two properties:
+
+```
+bintrayUsername=
+bintrayApiKey=
+```
+
+This file is not under version control for security reasons.
+
 ## Running the Templates ##
 
 The repository contains an *emews* template and 3 subtemplates *sweep*, *eqpy*, and *eqr*. The command
