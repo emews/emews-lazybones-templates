@@ -1,8 +1,8 @@
 EMEWS project template
 -----------------------
 
-You have just created an EMEWS project. Consisting of the following
-directories.
+You have just created an EMEWS project.
+The project consists of the following directories:
 
 ```
 swift_project\
