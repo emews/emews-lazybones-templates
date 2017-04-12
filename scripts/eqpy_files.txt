@@ -1,0 +1,2 @@
+https://raw.githubusercontent.com/emews/EQ-Py/master/src/EQPy.swift
+https://raw.githubusercontent.com/emews/EQ-Py/master/src/eqpy.py

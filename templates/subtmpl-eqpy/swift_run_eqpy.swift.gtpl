@@ -105,6 +105,16 @@ app (file out, file err) run_model (string model_sh, string param_line, string i
         v = make_void() =>
         c = false;
     }
+    else if (result == "EQPY_ABORT")
+    {
+        printf("EQR Aborted");
+        string why = EQPy_get(ME);
+        // TODO handle the abort if necessary
+        // e.g. write intermediate results ...
+        printf("%s", why) =>
+        v = propagate() =>
+        c = false;
+    }
     else
     {
         ${run_block}
