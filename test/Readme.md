@@ -70,3 +70,70 @@ TypeError: Can't convert 'int' object to str implicitly
 ```
 
 ## EQ/R ##
+
+To run the eqr test, do the following in the test directory. Make sure
+you've installed the latest templates into lazybones.
+
+```bash
+cp -R eqr eqr_test
+lazybones create emews 1.1 eqr_test
+cd eqr_test
+lazybones generate eqr (specify algorithm.R as the R ME algorithm)
+```
+
+In the swift script that is created as part of the eqr template, replace
+the obj function with:
+
+```java
+ (float agg_result) obj(string params, int trials, string iter_indiv_id) {
+   printf("swift received: %s", params);
+   agg_result = string2float(params) + 1.5;
+ }
+ ```
+
+ Run the wokflow using the generated launch script. The output should look
+like the following, although not necessarily in this order.
+
+```
+swift received: 1
+swift received: 2
+swift received: 3
+swift received: 33
+swift received: 34
+swift received: 35
+...
+```
+
+To test failure handling:
+
+Update the swift script to use algorithm_fail as the package, replacing
+
+```
+string algorithm = strcat(emews_root,"/R/algorithm.R");
+```
+
+with
+
+```
+string algorithm = strcat(emews_root,"/R/fail.R");
+```
+
+Run the launch script and the output should look like:
+
+```
+swift received: 1
+swift received: 2
+swift received: 3
+Error in "33" + 3 : non-numeric argument to binary operator
+EQR aborted: see output for R error
+Error evaluating:
+# Provides parameters to and accepts input from Swift tasks
+OUT_put("Hello From Algorithm")
+params = IN_get()
+OUT_put("1;2;3")
+result = IN_get()
+OUT_put("33" + 3)
+result = IN_get()
+OUT_put("DONE")
+OUT_put("final result")
+```

@@ -14,3 +14,4 @@ def run():
     eqpy.OUT_put("33;34;35" + 1)
     result = eqpy.IN_get()
     eqpy.OUT_put("DONE")
+    eqpy.OUT_put("results")

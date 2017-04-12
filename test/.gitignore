@@ -5,4 +5,5 @@ scripts/
 experiments/
 swift/
 eqpy_test/
+eqr_test/
 __pycache__
