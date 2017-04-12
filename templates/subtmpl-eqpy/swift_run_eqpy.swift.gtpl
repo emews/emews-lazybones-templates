@@ -105,9 +105,9 @@ app (file out, file err) run_model (string model_sh, string param_line, string i
         v = make_void() =>
         c = false;
     }
-    else if (result == "EQPY_ABORT")
+    else if (params == "EQPY_ABORT")
     {
-        printf("EQR Aborted");
+        printf("EQPy Aborted");
         string why = EQPy_get(ME);
         // TODO handle the abort if necessary
         // e.g. write intermediate results ...

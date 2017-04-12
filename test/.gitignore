@@ -1,0 +1,7 @@
+.lazybones
+etc/
+ext/
+scripts/
+experiments/
+swift/
+__pycache__

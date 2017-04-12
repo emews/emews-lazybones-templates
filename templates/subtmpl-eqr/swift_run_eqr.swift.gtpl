@@ -101,7 +101,7 @@ app (file out, file err) run_model (string model_sh, string param_line, string i
       v = make_void() =>
       c = false;
     }
-    else if (result == "EQR_ABORT")
+    else if (params == "EQR_ABORT")
     {
       printf("EQR aborted: see output for R error") =>
       string why = EQR_get(ME);
