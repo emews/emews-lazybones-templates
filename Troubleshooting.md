@@ -17,7 +17,7 @@ wrong # args: should be "turbine::python persist exceptions_are_errors code expr
 ```
 
 This can occur when running older version EQ/Py with a newer swift. 
-In ext/EQ-Py/EQPy.swift change:
+In `ext/EQ-Py/EQPy.swift`, change:
 
 ```
 [ "turbine::python 1 <<code>> <<expr>> "];
