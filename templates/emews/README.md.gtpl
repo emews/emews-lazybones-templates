@@ -2,6 +2,10 @@ EMEWS project template
 -----------------------
 
 You have just created an EMEWS project.
+
+This project is compatible with swift-t v. 1.3+. Earlier
+versions will NOT work.
+
 The project consists of the following directories:
 
 ```
