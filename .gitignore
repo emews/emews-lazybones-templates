@@ -1,3 +1,7 @@
 .gradle
 build
 gradle.properties
+templates/subtmpl-eqpy/EQPy.swift
+templates/subtmpl-eqpy/eqpy.py
+templates/subtmpl-eqr/eqr/*
+model.sh.gtpl

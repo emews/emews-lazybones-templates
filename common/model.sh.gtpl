@@ -13,8 +13,8 @@ set -eu
 
 # !!! IF YOU CHANGE THE NUMBER OF ARGUMENTS PASSED TO THIS SCRIPT, YOU MUST
 # CHANGE THE TIMEOUT_ARG_INDEX !!!
-TIMEOUT_ARG_INDEX=4
 TIMEOUT=""
+TIMEOUT_ARG_INDEX=4
 if [[ $# ==  $TIMEOUT_ARG_INDEX ]]
 then
 	TIMEOUT=${!TIMEOUT_ARG_INDEX}
@@ -38,22 +38,29 @@ emews_root=$2
 instance_directory=$3
 cd $instance_directory
 
-# TODO: Define the command to run the model
+# TODO: Define the command to run the model. For example,
+# MODEL_CMD="python"
 MODEL_CMD=""
+# TODO: Define the arguments to the MODEL_CMD. Each rguments should be
+# surrounded by quotes and separated by spaces. For example,
+# arg_array=("$emews_root/python/nt3_tc1_runner.py" "$parameter_string")
+arg_array=("arg1" "arg2" "arg3")
+COMMAND="$MODEL_CMD ${arg_array[@]}"
 
 # Turn bash error checking off. This is
 # required to properly handle the model execution return value
 # the optional timeout.
 set +e
+echo "Running $COMMAND"
 
-$TIMEOUT_CMD $MODEL_CMD
+$TIMEOUT_CMD $COMMAND
 # $? is the exit status of the most recently executed command (i.e the
 # line above)
 RES=$?
 if [ "$RES" -ne 0 ]; then
 	if [ "$RES" == 124 ]; then
-    echo "---> Timeout error in $MODEL_CMD"
+    echo "---> Timeout error in $COMMAND"
   else
-	   echo "---> Error in $MODEL_CMD"
+	   echo "---> Error in $COMMAND"
   fi
 fi
