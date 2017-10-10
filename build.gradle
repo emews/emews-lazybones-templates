@@ -15,42 +15,70 @@ buildscript {
 apply plugin: "uk.co.cacoethes.lazybones-templates"
 apply plugin: 'de.undercouch.download'
 
-task copyFiles << {
-  ['templates/subtmpl-sweep', 'templates/subtmpl-eqpy', 'templates/subtmpl-eqr'].each { dest ->
-    copy {
-      from 'common/model.sh.gtpl'
-      into dest
-    }
+task eqpyPre << {
+  copy {
+     from 'common/model.sh.gtpl'
+     into 'templates/subtmpl-eqpy'
+  }
+
+  def eqpy_files = ['EQPy.swift', 'eqpy.py']
+
+  delete {
+    eqpy_files.collect { 'templates/subtmpl-eqpy/' + it}
   }
 
   download {
-    src([
-        'https://raw.githubusercontent.com/emews/EQ-Py/master/src/EQPy.swift',
-        'https://raw.githubusercontent.com/emews/EQ-Py/master/src/eqpy.py'
-    ])
+    src(eqpy_files.collect{
+      'https://raw.githubusercontent.com/emews/EQ-Py/master/src/' + it
+    })
     dest 'templates/subtmpl-eqpy'
-  }
-
-  download {
-    src([
-      'https://raw.githubusercontent.com/emews/EQ-R/master/src/BlockingQueue.h',
-      'https://raw.githubusercontent.com/emews/EQ-R/master/src/EQR.cpp',
-      'https://raw.githubusercontent.com/emews/EQ-R/master/src/EQR.h',
-      'https://raw.githubusercontent.com/emews/EQ-R/master/src/EQR.i',
-      'https://raw.githubusercontent.com/emews/EQ-R/master/src/EQR.swift',
-      'https://raw.githubusercontent.com/emews/EQ-R/master/src/Makefile.in',
-      'https://raw.githubusercontent.com/emews/EQ-R/master/src/Readme.rst',
-      'https://raw.githubusercontent.com/emews/EQ-R/master/src/bootstrap',
-      'https://raw.githubusercontent.com/emews/EQ-R/master/src/configure.ac',
-      'https://raw.githubusercontent.com/emews/EQ-R/master/src/make-package.tcl',
-      'https://raw.githubusercontent.com/emews/EQ-R/master/src/settings.mk.in',
-      'https://raw.githubusercontent.com/emews/EQ-R/master/src/settings.template.sh'
-    ])
-    dest 'templates/subtmpl-eqr/eqr'
   }
 }
 
-packageAllTemplates.dependsOn copyFiles
+task eqrPre << {
+  copy {
+     from 'common/model.sh.gtpl'
+     into 'templates/subtmpl-eqr'
+  }
+
+  def eqr_files = ['BlockingQueue.h',
+    'EQR.cpp',
+    'EQR.h',
+    'EQR.i',
+    'EQR.swift',
+    'Makefile.in',
+    'bootstrap',
+    'configure.ac',
+    'make-package.tcl',
+    'settings.mk.in',
+    'settings.template.sh']
+
+  delete {
+    eqr_files.collect { 'templates/subtmpl-eqr/eqr/' + it}
+  }
+
+  download {
+    src(eqr_files.collect{
+      'https://raw.githubusercontent.com/emews/EQ-R/master/src/' + it
+    })
+    dest 'templates/subtmpl-eqr/eqr/'
+  }
+
+  exec {
+    commandLine 'chmod', 'ug+x', 'templates/subtmpl-eqr/eqr/bootstrap'
+  }
+}
+
+task sweepPre << {
+  copy {
+     from 'common/model.sh.gtpl'
+     into 'templates/subtmpl-sweep'
+  }
+}
+
+packageTemplateSubtmplEqpy.dependsOn eqpyPre
+packageTemplateSubtmplEqr.dependsOn eqrPre
+packageTemplateSubtmplSweep.dependsOn sweepPre
 
 lazybones {
     repositoryName = "emews/emews-templates"

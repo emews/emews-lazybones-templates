@@ -4,4 +4,6 @@ gradle.properties
 templates/subtmpl-eqpy/EQPy.swift
 templates/subtmpl-eqpy/eqpy.py
 templates/subtmpl-eqr/eqr/*
+!templates/subtmpl-eqr/eqr/COMPILING.txt
+!templates/subtmpl-eqr/eqr/gitignore.txt
 model.sh.gtpl
