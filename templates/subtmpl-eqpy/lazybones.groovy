@@ -22,7 +22,7 @@ def run_1 = '''
         {
             rs[k] = fromfloat(result);
         }
-        string res = join(rs, ",");
+        string res = join(rs, ";");
         EQPy_put(ME, res) => c = true;
 '''
 
